@@ -19,6 +19,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <link href="/css/app.css" rel="stylesheet">
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -44,6 +45,14 @@
                         </g>
                     </svg>
                 </div>
+
+                <section class="container mx-auto p-10">
+    <label for="checkbox" class="relative flex-inline items-center isolate p-4 rounded-2xl">
+        <input id="checkbox" type="checkbox" class="relative peer z-20 text-purple-600 rounded-md focus:ring-0" />
+        <span class="ml-2 relative z-20">Checkbox Selection</span>
+        <div class="absolute inset-0 bg-white peer-checked:bg-purple-50 peer-checked:border-purple-300 z-10 border rounded-2xl"></div>
+    </label>
+</section>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">

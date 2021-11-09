@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Providers;
+
+use App\Domain\Service\EntryExitComboboxService;
+use App\Domain\Service\Impl\EntryExitComboboxServiceImpl;
+use Illuminate\Support\ServiceProvider;
+
+class ComboboxServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+        // ItemServiceと実装クラスを紐づける
+        $this->app->bind(EntryExitComboboxService::class,EntryExitComboboxServiceImpl::class);
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+}

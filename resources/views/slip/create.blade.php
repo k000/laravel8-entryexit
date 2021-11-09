@@ -25,13 +25,14 @@
 
             <div class="w-screen">
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                @csrf
 
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block text-gray-700 text-sm font-bold mb-2">
                         入出庫伝票番号
                     </label>
-                    <input disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="no" type="text">
+                    <input disabled class="bg-gray-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg" id="no" type="text">
                     </div>
                 </div>
 

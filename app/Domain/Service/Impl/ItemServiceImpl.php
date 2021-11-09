@@ -17,17 +17,13 @@ class ItemServiceImpl implements ItemService
         $this->repository = $repository;
     }
 
-    // やることは少ないです
 
     public function create(StoreItemRequest $request)
     {
-        // 商品マスタに商品を登録します。
-
-        //　ドメインモデルを作成して、リポジトリの実装クラス（infrastructure）に引き渡します。
         $item = new Item($request->name, $request->price);
-
         $this->repository->create($item);
-
     }
+
+    
 
 }

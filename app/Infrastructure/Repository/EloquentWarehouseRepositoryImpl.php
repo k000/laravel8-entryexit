@@ -10,7 +10,19 @@ class EloquentWarehouseRepositoryImpl implements WarehouseRepository{
     
     public function create(Warehouse $warehouse){
         $eloquentWarehouse = new ModelsWarehouse();
-        $eloquentWarehouse->warehouse_name = $warehouse->getName();//カラム名に合わせる
+        $eloquentWarehouse->warehouse_name = $warehouse->getName();
         $eloquentWarehouse->save();
+    }
+
+    public function getAll()
+    {
+        $eloquentWarehouses = ModelsWarehouse::all();
+        $warehouses = array();
+        foreach($eloquentWarehouses as $eloquentWarehouse)
+        {
+            $warehouse = new Warehouse($eloquentWarehouse->warehouse_name);
+            array_push($warehouses,$warehouse);
+        }
+        return $warehouses;
     }
 }

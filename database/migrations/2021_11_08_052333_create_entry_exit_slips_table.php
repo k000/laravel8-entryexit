@@ -18,6 +18,7 @@ class CreateEntryExitSlipsTable extends Migration
             $table->integer('entry_exit_id');
             $table->date('slip_date');
             $table->string('slip_div');
+            $table->string('update_user');
             $table->timestamps();
             $table->unique(['entry_exit_id']);//ユニークキーを設定する
         });

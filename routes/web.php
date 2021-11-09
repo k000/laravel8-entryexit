@@ -32,6 +32,13 @@ Route::get('/item/create',function(){
 Route::post('/item/store',[App\Http\Controllers\ItemController::class, 'store']);
 
 
+Route::get('/warehouse/create',function(){
+    return view('warehouse.create');
+});
+
+Route::post('/warehouse/store',[App\Http\Controllers\WarehouseController::class, 'store']);
+
+
 
 
 Route::get('/dashboard', function () {

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Domain\Service\ItemService;
 use App\Http\Requests\StoreItemRequest;
-use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {

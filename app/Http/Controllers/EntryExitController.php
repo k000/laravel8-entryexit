@@ -26,15 +26,10 @@ class EntryExitController extends Controller
         // 依存の方向に注意
         $comboboxs = $entryexitCombo = $this->comboboxService->getEntryExitCombobox();
 
-        dd($comboboxs);
+        // TODO 取引区分を取得してコンボボックスに追加する
+        
 
-        // 商品一覧の取得
-
-
-        // 倉庫一覧の取得
-
-
-        return view('slip.create');
+        return view('slip.create', compact('comboboxs'));
 
     }
 

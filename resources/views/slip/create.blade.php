@@ -85,10 +85,18 @@
                                 サンプル
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
-                                サンプル
+                                <select name="test_combo">
+                                    @foreach($comboboxs->getItems() as $item)
+                                        <option value="">{{$item->getName()}}</option>
+                                    @endforeach
+                                </select>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
-                                サンプル
+                            <select name="test_combo">
+                                    @foreach($comboboxs->getWarehouses() as $warehouse)
+                                        <option value="">{{$warehouse->getName()}}</option>
+                                    @endforeach
+                                </select>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
                                 サンプル

@@ -14,4 +14,17 @@ class EloquentItemRepositoryImpl implements ItemRepository{
         $eloquentItem->price = $item->getPirce();
         $eloquentItem->save();
     }
+
+
+    public function getAll()
+    {
+        $eloquentItems = ModelsItem::all();
+        $items = array();
+        foreach($eloquentItems as $eloquentItem)
+        {
+            $item = new Item($eloquentItem->item_name, $eloquentItem->price);
+            array_push($items,$item);
+        }
+        return $items;
+    }
 }

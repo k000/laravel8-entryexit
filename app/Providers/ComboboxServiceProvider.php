@@ -15,8 +15,6 @@ class ComboboxServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
-        // ItemServiceと実装クラスを紐づける
         $this->app->bind(EntryExitComboboxService::class,EntryExitComboboxServiceImpl::class);
     }
 

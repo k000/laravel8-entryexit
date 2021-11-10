@@ -23,38 +23,42 @@
             @endif
 
 
-            <div class="w-screen">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                @csrf
-
+        <form name="registerform" action="/entryexit/store" method="post" id="registerform">
+        @csrf
+        <div class="w-11/12 mx-4">
+            <div class="w-full">  
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block text-gray-700 text-sm font-bold mb-2">
                         入出庫伝票番号
                     </label>
-                    <input disabled class="bg-gray-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg" id="no" type="text">
+                    <input name="slipno" disabled class="bg-gray-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg" id="no" type="text">
                     </div>
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block text-gray-700 text-sm font-bold mb-2">
-                        取引区分
+                        伝票区分
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="div" type="text">
+                        <select name="slipdiv">
+                            @foreach($comboboxs->getSlipDivs() as $slipDiv)
+                                
+                            <option value="{{$slipDiv}}">{{$slipDiv}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block text-gray-700 text-sm font-bold mb-2">
                         伝票日付
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="day" type="text">
+                    <input name="slipdate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="day" type="date">
                     </div>
                 </div>
-                </form>
+                
             </div>
         
-
             <!-- ヘッダごとスクロールさせたいのでスクロールする枠で囲います -->
             <h3>入出庫明細</h3>
             <div class="overflow-x-scroll">
@@ -63,7 +67,7 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider">
-                                取引区分
+                                明細区分
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider">
                                 商品名
@@ -82,33 +86,41 @@
                     <tbody class="bg-white divide-y divide-gray-200 text-left">
                         <tr>
                             <td class="px-6 py-3 whitespace-nowrap">
-                                サンプル
+                                <select name="detaildiv">
+                                    @foreach($comboboxs->getDetailDivs() as $detailDiv)
+                                        <option value="{{$detailDiv}}">{{$detailDiv}}</option>
+                                    @endforeach
+                                </select>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
-                                <select name="test_combo">
+                                <select name="itemname">
                                     @foreach($comboboxs->getItems() as $item)
-                                        <option value="">{{$item->getName()}}</option>
+                                        <option value="{{$item->getName()}}">{{$item->getName()}}</option>
                                     @endforeach
                                 </select>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
-                            <select name="test_combo">
+                            <select name="warehousename">
                                     @foreach($comboboxs->getWarehouses() as $warehouse)
-                                        <option value="">{{$warehouse->getName()}}</option>
+                                        <option value="{{$warehouse->getName()}}">{{$warehouse->getName()}}</option>
                                     @endforeach
                                 </select>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
-                                サンプル
+                                <input name="count" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg" id="no" type="number" min:1 require>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">
-                                サンプルA
+                            <input name="unit" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg" id="no" type="text" require>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
+            
+            <button type="submit" name="action" value="send" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded">
+                            登録
+            </button>
+        </form>    
 
         </div>
     </body>

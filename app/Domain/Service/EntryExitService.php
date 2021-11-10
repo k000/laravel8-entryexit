@@ -2,10 +2,9 @@
 
 namespace App\Domain\Service;
 
-class EntryExitService
-{
-    public function create()
-    {
+use Illuminate\Http\Request;
 
-    }
+interface EntryExitService
+{
+    public function create(Request $request);
 }

@@ -3,6 +3,7 @@
 namespace App\Domain\Service\Impl;
 
 use App\Domain\Logic\Service\EntryExitCreationLogic;
+use App\Domain\Logic\Validation\EntryExitCreateValidation;
 use App\Domain\Model\Entity\EntryExitDetail;
 use App\Domain\Model\Entity\EntryExitSlip;
 use App\Domain\Service\EntryExitService;
@@ -43,6 +44,8 @@ class EntryExitServiceImpl implements EntryExitService
         $slip->safeAddDetail($detail);
 
         // ドメインロジックバリデーション呼出し
+        $validationLogic = new EntryExitCreateValidation($slip);
+        $validationLogic->execute();
 
         // 在庫数のチェック
 

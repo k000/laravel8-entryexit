@@ -3,33 +3,44 @@
 namespace App\Domain\Logic\Rule\EntryExit;
 
 use App\Domain\Logic\Rule\Rule;
+use App\Domain\Model\Entity\EntryExitSlip;
 
 class TransactionCombinationRule implements Rule
 {
 
-    private string $slipDiv;
+    private EntryExitSlip $slip;
 
-    private string $detailDiv;
-
-    public function __construct(string $slipdiv, string $detaildiv)
+    public function __construct(EntryExitSlip $slip)
     {
-        $this->slipDiv = $slipdiv;
-        $this->detailDiv = $detaildiv;
+        $this->slip = $slip;
     }
 
     public function vaild()
     {
-        if($this->slipDiv === "入庫" && $this->detailDiv === "入庫" 
-            || $this->slipDiv === "入庫" && $this->detailDiv === "返品")
+
+
+        if($this->slip->getSlipDiv() === "入庫")
         {
-            return true;
+            foreach($this->slip->getDetails() as $detail)
+            {
+                if($detail->getDetailDiv() === "出庫" || $detail->getDetailDiv() === "破棄"){
+                    return false;
+                }
+            }
         }
-        if($this->slipDiv === "出庫" && $this->detailDiv === "出庫" 
-            || $this->slipDiv === "出庫" && $this->detailDiv === "破棄")
+
+        if($this->slip->getSlipDiv() === "出庫")
         {
-            return true;
+            foreach($this->slip->getDetails() as $detail)
+            {
+                if($detail->getDetailDiv() === "入庫" || $detail->getDetailDiv() === "返品"){
+                    return false;
+                }
+            }
         }
-        return false;
+
+        return true;
+
     }
 
 }

@@ -17,7 +17,7 @@ class CreateEntryExitDetailsTable extends Migration
             $table->id();
             $table->integer('entry_exit_id');
             $table->integer('detail_no');
-            $table->string('transaction_div');//取引区分
+            $table->string('detail_div');
             $table->integer('item_id');
             $table->string('item_name');
             $table->integer('warehouse_id');

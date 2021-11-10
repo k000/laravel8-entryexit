@@ -32,7 +32,7 @@
 
             <div class="w-2/3">
                 <h2>倉庫登録<h2>
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"name="registerform" action="/warehouse/store" method="post" id="registerform">
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" name="registerform" action="/warehouse/store" method="post" id="registerform">
                     @csrf
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full md:w-2/2 px-3 mb-6 md:mb-0">

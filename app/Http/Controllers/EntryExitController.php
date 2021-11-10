@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Service\EntryExitComboboxService;
-use App\Domain\Service\ItemService;
-use App\Domain\Service\WarehouseService;
+use App\Domain\Service\EntryExitService;
 use Illuminate\Http\Request;
 
 class EntryExitController extends Controller
@@ -12,25 +11,26 @@ class EntryExitController extends Controller
 
     private EntryExitComboboxService $comboboxService;
 
+    private EntryExitService $appService;
 
-    public function __construct(EntryExitComboboxService $service)
+    public function __construct(EntryExitComboboxService $service, EntryExitService $appService)
     {
         $this->comboboxService = $service;
+        $this->appService = $appService;
+
     }
 
     public function create()
     {
-        // 新規作成Viewを返します
-
-        // Viewに渡すModelとして、商品一覧、倉庫一覧の情報を一緒に渡す必要があります。
-        // 依存の方向に注意
         $comboboxs = $entryexitCombo = $this->comboboxService->getEntryExitCombobox();
 
-        // TODO 取引区分を取得してコンボボックスに追加する
-        
-
         return view('slip.create', compact('comboboxs'));
+    }
 
+
+    public function store(Request $request)
+    {
+        $this->appService->create($request);
     }
 
 }

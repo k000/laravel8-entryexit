@@ -2,7 +2,7 @@
 
 namespace App\Domain\Service\Impl;
 
-use App\Domain\ComboItem\ItemCombobox;
+use App\Domain\ComboItem\EntryExitItemCombobox;
 use App\Domain\Repository\ItemRepository;
 use App\Domain\Repository\WarehouseRepository;
 use App\Domain\Service\EntryExitComboboxService;
@@ -26,7 +26,13 @@ class EntryExitComboboxServiceImpl implements EntryExitComboboxService{
 
         $warehouses = $this->warehouseRepository->getAll();
 
-        return new ItemCombobox($items, $warehouses);
+        // 簡略化のため一旦値をべた書きしています。
+        $slipDivs = ["入庫","出庫"];
+
+        $detailDivs = ["入庫","返品","出庫","破棄"];
+
+        // Warning コードの変更範囲が大きくなる
+        return new EntryExitItemCombobox($items, $warehouses, $slipDivs, $detailDivs);
     }
 
 }

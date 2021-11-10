@@ -16,4 +16,26 @@ abstract class Slip{
 
     protected string $updateUser;
 
+    public function setSlipDate(Carbon $date)
+    {
+        $this->slipDate = $date;
+    }
+    
+    public function getSlipDate()
+    {
+        return $this->slipDate;
+    }
+
+
+    public function setUpdateUser(string $name)
+    {
+        $this->updateUser = $name;
+    }
+
+    public function getUpdateUser()
+    {
+        return $this->updateUser;
+    }
+
+
 }

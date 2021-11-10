@@ -116,9 +116,11 @@
                     </tbody>
                 </table>
             </div>
+
+            <input type="hidden" name="lastupdate" value="" />
             
             <button type="submit" name="action" value="send" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded">
-                            登録
+                登録
             </button>
         </form>    
 

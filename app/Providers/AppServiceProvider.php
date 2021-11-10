@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Domain\Repository\NumberingRepository;
+use App\Infrastructure\Repository\NumberingRepositoryImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // 採番処理
+        $this->app->bind(NumberingRepository::class,NumberingRepositoryImpl::class);
     }
 
     /**

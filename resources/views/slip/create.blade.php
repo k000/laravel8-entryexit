@@ -23,6 +23,18 @@
             @endif
 
 
+        
+        <div>
+            <!-- TODO 配列エラーの表示 -->
+            @if($errors->has("result"))
+            <ul>
+                @foreach($errors->get("result") as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+        </div>
+
         <form name="registerform" action="/entryexit/store" method="post" id="registerform">
         @csrf
         <div class="w-11/12 mx-4">
@@ -116,9 +128,11 @@
                     </tbody>
                 </table>
             </div>
+
+            <input type="hidden" name="lastupdate" value="" />
             
             <button type="submit" name="action" value="send" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded">
-                            登録
+                登録
             </button>
         </form>    
 

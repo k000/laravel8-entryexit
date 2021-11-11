@@ -41,13 +41,12 @@ class EntryExitCreateValidation
             //$result = array_merge($this->message,$vaildResult);
         }
 
-
         if(count($result) !== 0)
         {
-            Redirect::route('entryexitcreate')->withErrors(['messages' => $result, 'result' => "エラーがあります"])->withInput()->throwResponse();;
+            Redirect::route('entryexitcreate')->with(["messages" => $result])->withErrors(['result' => "エラーがあります"])->withInput()->throwResponse();;
         }
 
-        dd($result);
+        dd("在庫数のチェックへ");
 
     }
 

@@ -31,8 +31,17 @@
                 @foreach($errors->get("result") as $error)
                     <li>{{ $error }}</li>
                 @endforeach
+
+                @foreach(session('messages') as $messages)
+                    @foreach($messages as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                @endforeach
+
             </ul>
             @endif
+
+            
         </div>
 
         <form name="registerform" action="/entryexit/store" method="post" id="registerform">

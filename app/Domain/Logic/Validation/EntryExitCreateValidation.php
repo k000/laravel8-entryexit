@@ -3,15 +3,15 @@
 namespace App\Domain\Logic\Validation;
 
 use App\Domain\Logic\Rule\EntryExit\TransactionCombinationRule;
-use App\Domain\Logic\Rule\Rule;
 use App\Domain\Model\Entity\EntryExitSlip;
-
-use function PHPUnit\Framework\isNull;
+use Illuminate\Support\Facades\Redirect;
 
 class EntryExitCreateValidation
 {
 
     private array $rules = array();
+
+    private array $message = array();
 
     private EntryExitSlip $slip;
 
@@ -27,17 +27,28 @@ class EntryExitCreateValidation
     public function execute()
     {
 
-        // TODO これはまずいので実装方法があり次第修正する
+        // TODO 実装方法があり次第修正する
         $rule = new TransactionCombinationRule($this->slip);
-        $rule->vaild();
+        $vaildResult = $rule->vaild();
+
+        $result = array_merge($this->message,$vaildResult);
 
         foreach($this->rules as $rule)
         {
 
             // Javaのようにできないので一旦、保留の処理になっています。
-            // $rule->vaild();
+            // $vaildResult = $rule->vaild();
+            //$result = array_merge($this->message,$vaildResult);
         }
-    }
 
+
+        if(count($result) !== 0)
+        {
+            Redirect::route('entryexitcreate')->withErrors(['messages' => $result, 'result' => "エラーがあります"])->withInput()->throwResponse();;
+        }
+
+        dd($result);
+
+    }
 
 }

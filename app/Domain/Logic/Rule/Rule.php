@@ -4,5 +4,5 @@ namespace App\Domain\Logic\Rule;
 
 interface Rule
 {
-    public function vaild();
+    public function vaild() :array;
 }

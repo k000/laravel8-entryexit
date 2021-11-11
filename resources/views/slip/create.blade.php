@@ -23,6 +23,18 @@
             @endif
 
 
+        
+        <div>
+            <!-- TODO 配列エラーの表示 -->
+            @if($errors->has("result"))
+            <ul>
+                @foreach($errors->get("result") as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+        </div>
+
         <form name="registerform" action="/entryexit/store" method="post" id="registerform">
         @csrf
         <div class="w-11/12 mx-4">

@@ -15,16 +15,17 @@ class TransactionCombinationRule implements Rule
         $this->slip = $slip;
     }
 
-    public function vaild()
+    public function vaild(): array
     {
 
+        $messages = array();
 
         if($this->slip->getSlipDiv() === "入庫")
         {
             foreach($this->slip->getDetails() as $detail)
             {
                 if($detail->getDetailDiv() === "出庫" || $detail->getDetailDiv() === "破棄"){
-                    return false;
+                    array_push($messages,["伝票と明細の取引区分が不正です。"]);
                 }
             }
         }
@@ -34,12 +35,12 @@ class TransactionCombinationRule implements Rule
             foreach($this->slip->getDetails() as $detail)
             {
                 if($detail->getDetailDiv() === "入庫" || $detail->getDetailDiv() === "返品"){
-                    return false;
+                    array_push($messages,["伝票と明細の取引区分が不正です。"]);
                 }
             }
         }
 
-        return true;
+        return $messages;
 
     }
 

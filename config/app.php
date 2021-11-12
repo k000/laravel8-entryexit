@@ -179,6 +179,7 @@ return [
         App\Providers\WarehouseServiceProvider::class,
         App\Providers\ComboboxServiceProvider::class,
         App\Providers\EntryExitServiceProvider::class,
+        App\Providers\StockServiceProvider::class,
     ],
 
     /*

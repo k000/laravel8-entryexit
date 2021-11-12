@@ -4,10 +4,8 @@ namespace App\Domain\Model\Entity;
 
 use App\Domain\Model\ValueObject\Price;
 
-
 class Item
 {
-
     private string $name;
 
     private Price $price;

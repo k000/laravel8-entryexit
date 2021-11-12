@@ -19,7 +19,7 @@ class CreateStocksTable extends Migration
             $table->string('warehouse_name');
             $table->integer('item_id');
             $table->string('item_name');
-            $table->integer('amount');
+            $table->integer('count');
             $table->timestamps();
         });
     }

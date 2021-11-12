@@ -19,7 +19,6 @@ class EntryExitDetail extends Detail{
 
     private string $unit;
 
-
     public function setEntryExitNo(int $no)
     {
         $this->entryexitNo = $no;
@@ -79,5 +78,30 @@ class EntryExitDetail extends Detail{
     {
         return $this->warehouseName;
     }
+
+    /**
+     * 明細区分と数量の整合性を検証します
+     */
+    public function isExpectedCount(): bool
+    {
+        // todo refactor use types
+        if($this->detailDiv === "入庫" || $this->detailDiv === "返品")
+        {
+            if($this->count <= 0){
+                return false;
+            }
+        }
+
+        if($this->detailDiv === "出庫" || $this->detailDiv === "破棄")
+        {
+            if($this->count >= 0){
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
 
 }

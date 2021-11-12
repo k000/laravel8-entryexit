@@ -54,7 +54,9 @@
                                 <td class="border px-4 py-2">{{ $detail->getWarehouseName() }}</td>
                                 <td class="border px-4 py-2">{{ $detail->getCount() }}</td>
                                 <td class="border px-4 py-2">{{ $detail->getUnit() }}</td>
-                                <td class="border px-4 py-2">編集</td>
+                                <td class="border px-4 py-2">
+                                    <a href="/entryexit/edit/{{ $slip->getEntryExitId() }}">編集</a>
+                                </td>
                                 <td class="border px-4 py-2">削除</td>
                             @endforeach
                             </tr>

@@ -9,4 +9,9 @@ interface EntryExitSlipRepository
     public function create(EntryExitSlip $slip);
 
     public function getAll();
+
+    public function findById(int $id);
+
+    public function update(EntryExitSlip $slip);
+
 }

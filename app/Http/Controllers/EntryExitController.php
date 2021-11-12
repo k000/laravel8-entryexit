@@ -42,4 +42,22 @@ class EntryExitController extends Controller
         return view('slip.all', compact('slips'));
     }
 
+
+    public function edit($id)
+    {
+        // 伝票情報を取得
+        $slip = $this->appService->getByEntryExitId($id);
+        // コンボボックスの取得
+        $comboboxs = $entryexitCombo = $this->comboboxService->getEntryExitCombobox();
+    
+        // Viewの反映
+        return view('slip.edit', compact('slip','comboboxs'));
+
+    }
+
+    public function update(Request $request)
+    {
+        $this->appService->update($request);
+    }
+
 }

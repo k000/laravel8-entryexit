@@ -4,6 +4,7 @@ namespace App\Domain\Service\Impl;
 
 use App\Domain\Dto\StockDto;
 use App\Domain\Logic\Service\EntryExitCreationLogic;
+use App\Domain\Logic\Service\EntryExitInitializeLogic;
 use App\Domain\Logic\Validation\EntryExitCreateValidation;
 use App\Domain\Model\Entity\EntryExitDetail;
 use App\Domain\Model\Entity\EntryExitSlip;
@@ -18,16 +19,22 @@ class EntryExitServiceImpl implements EntryExitService
 
     private EntryExitCreationLogic $createtionLogic;
 
+    private EntryExitInitializeLogic $initializeLogic;
+
     private NumberingRepository $numberRepository;
 
     private StockService $stockService;
 
-    public function __construct(EntryExitCreationLogic $logic, 
-        NumberingRepository $numberRepository,StockService $stockService)
+    public function __construct(
+        EntryExitCreationLogic $logic, 
+        NumberingRepository $numberRepository,
+        StockService $stockService,
+        EntryExitInitializeLogic $initializeLogic)
     {
         $this->createtionLogic = $logic;
         $this->numberRepository = $numberRepository;
         $this->stockService = $stockService;
+        $this->initializeLogic = $initializeLogic;
     }
 
     public function create(Request $request)
@@ -64,7 +71,12 @@ class EntryExitServiceImpl implements EntryExitService
 
         // 永続化処理
         $this->createtionLogic->create($slip);
+    }
 
+
+    public function getAll()
+    {
+        return $this->initializeLogic->getAll();
     }
 
 }

@@ -7,4 +7,6 @@ use Illuminate\Http\Request;
 interface EntryExitService
 {
     public function create(Request $request);
+
+    public function getAll();
 }

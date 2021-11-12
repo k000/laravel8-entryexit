@@ -33,4 +33,13 @@ class EntryExitController extends Controller
         $this->appService->create($request);
     }
 
+
+    public function all()
+    {
+        // 伝票情報
+        $slips = $this->appService->getAll();
+
+        return view('slip.all', compact('slips'));
+    }
+
 }

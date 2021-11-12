@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Domain\Logic\Service\EntryExitCreationLogic;
+use App\Domain\Logic\Service\EntryExitInitializeLogic;
 use App\Domain\Logic\Service\Impl\EntryExitCreationLogicImpl;
+use App\Domain\Logic\Service\Impl\EntryExitInitializeLogicImpl;
 use App\Domain\Repository\EntryExitDetailRepository;
 use App\Domain\Repository\EntryExitSlipRepository;
 use App\Domain\Service\EntryExitService;
@@ -24,6 +26,8 @@ class EntryExitServiceProvider extends ServiceProvider
         $this->app->bind(EntryExitService::class, EntryExitServiceImpl::class);
         // 新規作成ロジック
         $this->app->bind(EntryExitCreationLogic::class, EntryExitCreationLogicImpl::class);
+        // 初期化ロジック
+        $this->app->bind(EntryExitInitializeLogic::class, EntryExitInitializeLogicImpl::class);
         // リポジトリ
         $this->app->bind(EntryExitSlipRepository::class, EloquentEntryExitSlipRepositoryImpl::class);
         $this->app->bind(EntryExitDetailRepository::class, EloquentEntryExitDetailRepositoryImpl::class);

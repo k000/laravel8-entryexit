@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class EntryExitDetail extends Model
 {
     use HasFactory;
+
+    public function slip()
+    {
+        return $this->hasOne("\App\Models\EntryExitSlip","entry_exit_id");
+    }
 }

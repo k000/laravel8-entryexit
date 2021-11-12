@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::get('/entryexit/create', [App\Http\Controllers\EntryExitController::class, 'create'])->name('entryexitcreate');
 Route::post('/entryexit/store',[App\Http\Controllers\EntryExitController::class, 'store']);
 
+Route::get('/entryexit/all',[App\Http\Controllers\EntryExitController::class, 'all']);
+Route::get('/entryexit/edit', [App\Http\Controllers\EntryExitController::class, 'edit'])->name('entryexitedit');
 
 
 

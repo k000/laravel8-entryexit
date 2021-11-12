@@ -4,6 +4,7 @@ namespace App\Domain\Service\Impl;
 
 use App\Domain\Dto\StockDto;
 use App\Domain\Logic\Service\EntryExitCreationLogic;
+use App\Domain\Logic\Service\EntryExitInitializeLogic;
 use App\Domain\Logic\Validation\EntryExitCreateValidation;
 use App\Domain\Model\Entity\EntryExitDetail;
 use App\Domain\Model\Entity\EntryExitSlip;
@@ -18,16 +19,22 @@ class EntryExitServiceImpl implements EntryExitService
 
     private EntryExitCreationLogic $createtionLogic;
 
+    private EntryExitInitializeLogic $initializeLogic;
+
     private NumberingRepository $numberRepository;
 
     private StockService $stockService;
 
-    public function __construct(EntryExitCreationLogic $logic, 
-        NumberingRepository $numberRepository,StockService $stockService)
+    public function __construct(
+        EntryExitCreationLogic $logic, 
+        NumberingRepository $numberRepository,
+        StockService $stockService,
+        EntryExitInitializeLogic $initializeLogic)
     {
         $this->createtionLogic = $logic;
         $this->numberRepository = $numberRepository;
         $this->stockService = $stockService;
+        $this->initializeLogic = $initializeLogic;
     }
 
     public function create(Request $request)
@@ -58,30 +65,18 @@ class EntryExitServiceImpl implements EntryExitService
         $validationLogic = new EntryExitCreateValidation($slip);
         $validationLogic->execute();
 
-        // 在庫数のチェック
-
-        // 在庫モデルを作成します。
-        // DTO的なものを作りたい。（数量をマイナス登録したほうがよいのでは？）
+        // 在庫ロジック
         $stockDto = new StockDto($detail->getItemName(), $detail->getWarehouseName(), $detail->getCount());
         $this->stockService->update($stockDto);
 
-        dd("tourokumade oK!!!!");
-
-        // 在庫モデルをUpdateに引き渡します。
-        // updateで検証を行います。
-            // 検証内容は、在庫モデルの数量が出庫数で-になったらだめ
-
-            // 出庫をupdateします。
-
-        // Lets gooo!!! buuuuooooonnn!!!
-        
-        // stockは既にある場合もあれば無い場合もあるので別途取得します。
-
-
         // 永続化処理
         $this->createtionLogic->create($slip);
+    }
 
 
+    public function getAll()
+    {
+        return $this->initializeLogic->getAll();
     }
 
 }

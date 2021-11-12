@@ -2,7 +2,9 @@
 
 namespace App\Domain\Service;
 
+use App\Domain\Dto\StockDto;
+
 interface StockService
 {
-    public function update(string $itemName, string $warehouoseName);
+    public function update(StockDto $dto);
 }

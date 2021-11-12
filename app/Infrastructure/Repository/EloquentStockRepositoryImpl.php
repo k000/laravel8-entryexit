@@ -14,11 +14,12 @@ class EloquentStockRepositoryImpl implements StockRepository{
     {
         $stock = new Stock();
 
-        $modelStock = ModelsStock::where('item_name', $itemName)->where('warehouse_name', $warehouoseName)->get();
+        // getは戻り値がコレクション
+        $modelStock = ModelsStock::where('item_name', $itemName)->where('warehouse_name', $warehouoseName)->first();
         
         // todo refactor
         // 戻り値がCollectionです
-        if($modelStock->isEmpty())
+        if($modelStock === null)
         {
             $stock->setItenName($itemName);
             $stock->setWarehouseName($warehouoseName);
@@ -26,12 +27,23 @@ class EloquentStockRepositoryImpl implements StockRepository{
             return $stock;
         }
 
-        dd($modelStock);
         $stock->setItenName($modelStock->item_name);
         $stock->setWarehouseName($modelStock->warehouse_name);
-        $stock->setCount($modelStock->itemcount_name);
+        $stock->setCount($modelStock->count);
 
         return $stock;
+
+    }
+
+
+    public function insertOrUpdate(Stock $stock)
+    {
+        // 同一性が保持できていない
+        $modelStock = new ModelsStock();
+        $modelStock->warehouse_name = $stock->getWarehouseName();
+        $modelStock->item_name = $stock->getItemName();
+        $modelStock->count = $stock->getWillCount();
+        $modelStock->save();
 
     }
 

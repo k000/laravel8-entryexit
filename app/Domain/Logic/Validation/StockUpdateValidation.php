@@ -2,21 +2,18 @@
 
 namespace App\Domain\Logic\Validation;
 
-use App\Domain\Logic\Rule\EntryExit\TransactionCombinationRule;
-use App\Domain\Logic\Rule\EntryExit\VaildCountRule;
 use App\Domain\Logic\Rule\Rule;
-use App\Domain\Model\Entity\EntryExitSlip;
+use App\Domain\Logic\Rule\Stock\StockCountRule;
+use App\Domain\Model\Entity\Stock;
 use Illuminate\Support\Facades\Redirect;
 
-class EntryExitCreateValidation
-{
+class StockUpdateValidation{
 
     private array $rules = array();
 
-    public function __construct(EntryExitSlip $slip)
+    public function __construct(Stock $stock)
     {
-        $this->addRule(new TransactionCombinationRule($slip));
-        $this->addRule(new VaildCountRule($slip));
+        $this->addRule(new StockCountRule($stock));
     }
 
     public function execute()
@@ -36,11 +33,8 @@ class EntryExitCreateValidation
 
     }
 
-    // TODO 基底クラスに移動する
-    // TODO 引数を可変にする
     private function addRule(Rule $rule)
     {
         array_push($this->rules,$rule);
     }
-
 }

@@ -21,6 +21,8 @@ class StockFactoryImpl implements StockFactory{
         // リポジトリから取得する。
         $stock =$this->repository->getStockByName($itemName,$warehouseName);
 
+        return $stock;
+
     }
 
 }

@@ -11,9 +11,11 @@ class Stock
 
     private int $count;
 
-    public function canExit(int $exitCount)
+    private int $scheduleCount;
+
+    public function canExit()
     {
-        if($this->count - $exitCount < 0)
+        if($this->count + ($this->scheduleCount) < 0)
         {
             return false;
         }
@@ -51,5 +53,21 @@ class Stock
         return $this->count;
     }
 
+    public function setScheduleCount(int $count)
+    {
+        $this->scheduleCount = $count;
+    }
+
+    // todo refactor
+    public function getCurrentCount()
+    {
+        return $this->count;
+    }
+
+    // 実在庫と予定在庫（仮）を足したもの
+    public function getWillCount()
+    {
+        return $this->count + $this->scheduleCount;
+    }
 
 }

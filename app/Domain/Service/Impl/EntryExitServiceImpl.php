@@ -2,6 +2,7 @@
 
 namespace App\Domain\Service\Impl;
 
+use App\Domain\Dto\StockDto;
 use App\Domain\Logic\Service\EntryExitCreationLogic;
 use App\Domain\Logic\Validation\EntryExitCreateValidation;
 use App\Domain\Model\Entity\EntryExitDetail;
@@ -54,7 +55,6 @@ class EntryExitServiceImpl implements EntryExitService
 
         $slip->safeAddDetail($detail);
 
-        // ドメインロジックバリデーション呼出し
         $validationLogic = new EntryExitCreateValidation($slip);
         $validationLogic->execute();
 
@@ -62,11 +62,10 @@ class EntryExitServiceImpl implements EntryExitService
 
         // 在庫モデルを作成します。
         // DTO的なものを作りたい。（数量をマイナス登録したほうがよいのでは？）
+        $stockDto = new StockDto($detail->getItemName(), $detail->getWarehouseName(), $detail->getCount());
+        $this->stockService->update($stockDto);
 
-        
-        $this->stockService->update($detail->getItemName(), $detail->getWarehouseName());
-
-        dd("ok");
+        dd("tourokumade oK!!!!");
 
         // 在庫モデルをUpdateに引き渡します。
         // updateで検証を行います。

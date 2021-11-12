@@ -5,6 +5,9 @@ namespace App\Domain\Model\Entity;
 
 class Stock
 {
+
+    private int $id;
+
     private string $itemName;
 
     private string $warehouseName;
@@ -68,6 +71,16 @@ class Stock
     public function getWillCount()
     {
         return $this->count + $this->scheduleCount;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
 }

@@ -11,9 +11,6 @@ class EntryExitInitializeLogicImpl implements EntryExitInitializeLogic
 
     private EntryExitSlipRepository $slipRepository;
 
-    private EntryExitDetailRepository $detailRepository;
-
-
     public function __construct(EntryExitSlipRepository $slipRespository, EntryExitDetailRepository $detailRepository)
     {
         $this->slipRepository = $slipRespository;
@@ -23,8 +20,14 @@ class EntryExitInitializeLogicImpl implements EntryExitInitializeLogic
     public function getAll()
     {
         // ドメインモデルを返却します。
+        // この記載だとEloquentモデルに依存しがち
         return $this->slipRepository->getAll();
 
+    }
+
+    public function findById(int $id)
+    {
+        return $this->slipRepository->findById($id);
     }
 
 

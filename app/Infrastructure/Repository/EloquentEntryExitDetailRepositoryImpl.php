@@ -8,6 +8,7 @@ use App\Models\EntryExitDetail as ModelsEntryExitDetail;
 
 class EloquentEntryExitDetailRepositoryImpl implements EntryExitDetailRepository{
     
+    // TODO itemidなどは削除する
     public function create(EntryExitDetail $detail)
     {
         $eloquentDetail = new ModelsEntryExitDetail();
@@ -25,9 +26,11 @@ class EloquentEntryExitDetailRepositoryImpl implements EntryExitDetailRepository
 
     public function delete(int $entryexitId)
     {
-
+        $eloquentDetail = ModelsEntryExitDetail::where('entry_exit_id', $entryexitId);
+        $eloquentDetail->delete();
     }
 
+    // TODO 削除
     public function getAll()
     {
 

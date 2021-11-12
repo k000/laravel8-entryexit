@@ -38,7 +38,7 @@ class EloquentStockRepositoryImpl implements StockRepository{
         // TODO インサートとアップデートで処理を分けたい
         $modelStock = null;
 
-        // 0を修正する
+        // TODO 0を修正する
         if ($stock->getId() !== 0)
         {
             $modelStock = ModelsStock::find($stock->getId());

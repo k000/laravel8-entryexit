@@ -28,6 +28,7 @@ Route::get('/entryexit/edit/{id}', [App\Http\Controllers\EntryExitController::cl
 
 Route::post('/entryexit/update',[App\Http\Controllers\EntryExitController::class, 'update']);
 
+Route::post('/entryexit/delete/{id}', [App\Http\Controllers\EntryExitController::class, 'delete'])->name('entryexitdelete');
 
 
 

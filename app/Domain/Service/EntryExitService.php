@@ -13,4 +13,6 @@ interface EntryExitService
     public function getByEntryExitId(int $id);
 
     public function update(Request $request);
+
+    public function delete(int $id);
 }

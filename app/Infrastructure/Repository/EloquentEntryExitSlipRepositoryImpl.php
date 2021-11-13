@@ -97,4 +97,10 @@ class EloquentEntryExitSlipRepositoryImpl implements EntryExitSlipRepository{
         $eloquentSlip->save();
     }
 
+    public function delete(int $id)
+    {
+        $eloquentSlip = ModelsEntryExitSlip::where('entry_exit_id',$id)->first();
+        $eloquentSlip->delete();
+    }
+
 }

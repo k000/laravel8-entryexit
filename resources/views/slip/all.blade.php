@@ -57,7 +57,12 @@
                                 <td class="border px-4 py-2">
                                     <a href="/entryexit/edit/{{ $slip->getEntryExitId() }}">編集</a>
                                 </td>
-                                <td class="border px-4 py-2">削除</td>
+                                <td class="border px-4 py-2">
+                                    <form method="post" action="/entryexit/delete/{{ $slip->getEntryExitId() }}">
+                                    @csrf
+                                    <input type="submit" value="削除" class="btn btn-danger btn-sm">
+                                    </form>
+                                </td>
                             @endforeach
                             </tr>
                         </tbody>

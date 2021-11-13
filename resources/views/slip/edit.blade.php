@@ -122,7 +122,7 @@
                                 <select name="itemname">
                                     @foreach($comboboxs->getItems() as $item)
                                         <option value="{{$item->getName()}}"
-                                            @if($detail->getItemName() === $item) selected @endif>
+                                            @if($detail->getItemName() === $item->getName()) selected @endif>
                                             {{$item->getName()}}</option>
                                     @endforeach
                                 </select>
@@ -131,7 +131,7 @@
                             <select name="warehousename">
                                     @foreach($comboboxs->getWarehouses() as $warehouse)
                                         <option value="{{$warehouse->getName()}}"
-                                        @if($detail->getWarehouseName() === $warehouse) selected @endif>
+                                        @if($detail->getWarehouseName() === $warehouse->getName()) selected @endif>
                                             {{$warehouse->getName()}}</option>
                                     @endforeach
                                 </select>
@@ -143,11 +143,7 @@
                             <input value="{{ $detail->getUnit() }}" name="unit" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg" id="no" type="text" require>
                         </td>
                         </tr>   
-                        @endforeach
-
-
-
-                        
+                        @endforeach              
                     </tbody>
                 </table>
             </div>

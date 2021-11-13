@@ -36,8 +36,6 @@ class StockServiceImpl implements StockService
 
     }
 
-
-
     public function changeUpdate(StockDto $newDto, StockDto $oldDto)
     {
 
@@ -80,11 +78,9 @@ class StockServiceImpl implements StockService
     }
 
 
-
     // updateに似ている
     public function deleteUpdate(StockDto $dto)
     {
-        
         $stock = $this->stockFactory->getStock($dto->itemName,$dto->warehouseName);
         // 予定数（入庫出庫）を設定する
         $stock->setScheduleCount($dto->count * -1);
@@ -95,6 +91,12 @@ class StockServiceImpl implements StockService
 
         // 登録する
         $this->repository->insertOrUpdate($stock);
+    }
+
+
+    public function getAll()
+    {
+        return $this->repository->getAll();
     }
 
 }

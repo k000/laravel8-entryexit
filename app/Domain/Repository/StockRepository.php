@@ -9,4 +9,6 @@ interface StockRepository
     public function getStockByName(string $itemName, string $warehouoseName);
 
     public function insertOrUpdate(Stock $stock);
+
+    public function getAll();
 }

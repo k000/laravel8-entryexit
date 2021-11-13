@@ -53,4 +53,28 @@ class EloquentStockRepositoryImpl implements StockRepository{
 
     }
 
+    public function getAll()
+    {
+        // getは戻り値がコレクション
+        $modelStock = ModelsStock::where('count', '>' , 0)->get();
+
+        if($modelStock->isEmpty()){
+            return;
+        }
+
+        $stocks = array();
+
+        // collectionのeachを使うとクロージャなので$stocksが参照できない
+        foreach($modelStock as $model)
+        {
+            $stock = new Stock();
+            $stock->setItenName($model->item_name);
+            $stock->setWarehouseName($model->warehouse_name);
+            $stock->setCount($model->count);
+            array_push($stocks,$stock);
+        }
+
+        return $stocks;
+    }
+
 }

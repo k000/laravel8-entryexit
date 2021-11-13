@@ -30,7 +30,7 @@ Route::post('/entryexit/update',[App\Http\Controllers\EntryExitController::class
 
 Route::post('/entryexit/delete/{id}', [App\Http\Controllers\EntryExitController::class, 'delete'])->name('entryexitdelete');
 
-
+Route::get('/stocks',[App\Http\Controllers\StockController::class, 'all']);
 
 
 

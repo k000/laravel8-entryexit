@@ -49,32 +49,13 @@ class StockServiceImpl implements StockService
         {
             $redStock = $this->stockFactory->getStock($oldDto->itemName,$oldDto->warehouseName);
             // 打消し数を設定する
-            $redStock->setScheduleCount($redStock->count * -1);
+            $redStock->setScheduleCount($oldDto->count * -1);
 
             // バリデーションを行う
             $validationLogic = new StockUpdateValidation($redStock);
             $validationLogic->execute();
         }
 
-        /**
-         * 
-         * 例
-         * 
-         * 入庫
-         * 10 → 20のケース
-         * 10 - 20 = -10 * -1 = 10 = 10件プラス
-         * 
-         * 10 → 5のケース
-         * 10 - 5 = 5 * -1 = -5 = 5件マイナス
-         * 
-         * 出庫
-         * -10 → -20のケース
-         * -10 - -20 = 10 * -1 = -10 = 10件マイナス
-         * 
-         * -10 → -5のケース
-         * -10 - -5 = -5 * -1 = 5 = 5件プラス
-         * 
-         */
         if($redStock == null){
             $diffCount = $oldDto->count - $newDto->count;
 
@@ -89,6 +70,7 @@ class StockServiceImpl implements StockService
             $this->repository->insertOrUpdate($stock);
 
         } else {
+
             // 新規と同様の登録を行う
             $this->update($newDto);
             // 商品または倉庫が違うので打消し明細を登録する

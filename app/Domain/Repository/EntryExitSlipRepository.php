@@ -14,4 +14,6 @@ interface EntryExitSlipRepository
 
     public function update(EntryExitSlip $slip);
 
+    public function delete(int $id);
+
 }

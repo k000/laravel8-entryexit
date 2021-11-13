@@ -12,4 +12,5 @@ interface EntryExitDetailRepository
     public function delete(int $enteryexitId);
 
     public function getAll();
+
 }

@@ -79,4 +79,22 @@ class StockServiceImpl implements StockService
 
     }
 
+
+
+    // updateに似ている
+    public function deleteUpdate(StockDto $dto)
+    {
+        
+        $stock = $this->stockFactory->getStock($dto->itemName,$dto->warehouseName);
+        // 予定数（入庫出庫）を設定する
+        $stock->setScheduleCount($dto->count * -1);
+
+        // バリデーションを行う
+        $validationLogic = new StockUpdateValidation($stock);
+        $validationLogic->execute();
+
+        // 登録する
+        $this->repository->insertOrUpdate($stock);
+    }
+
 }

@@ -60,4 +60,9 @@ class EntryExitController extends Controller
         $this->appService->update($request);
     }
 
+    public function delete($id)
+    {
+       $this->appService->delete($id);
+    }
+
 }

@@ -4,13 +4,14 @@ namespace App\Domain\Service\Impl;
 
 use App\Domain\Dto\StockDto;
 use App\Domain\Logic\Service\EntryExitCreationLogic;
+use App\Domain\Logic\Service\EntryExitDeleteLogic;
 use App\Domain\Logic\Service\EntryExitInitializeLogic;
 use App\Domain\Logic\Service\EntryExitUpdateLogic;
-use App\Domain\Logic\Service\Impl\EntryExitUpdateLogicImpl;
 use App\Domain\Logic\Validation\EntryExitCreateValidation;
 use App\Domain\Logic\Validation\EntryExitUpdateeValidation;
 use App\Domain\Model\Entity\EntryExitDetail;
 use App\Domain\Model\Entity\EntryExitSlip;
+use App\Domain\Repository\EntryExitSlipRepository;
 use App\Domain\Repository\NumberingRepository;
 use App\Domain\Service\EntryExitService;
 use App\Domain\Service\StockService;
@@ -24,6 +25,10 @@ class EntryExitServiceImpl implements EntryExitService
 
     private EntryExitUpdateLogic $updateLogic;
 
+    private EntryExitDeleteLogic $deleteLogic;
+
+    private EntryExitSlipRepository $entryExitSlipRepository;
+
     private EntryExitInitializeLogic $initializeLogic;
 
     private NumberingRepository $numberRepository;
@@ -35,13 +40,18 @@ class EntryExitServiceImpl implements EntryExitService
         NumberingRepository $numberRepository,
         StockService $stockService,
         EntryExitInitializeLogic $initializeLogic,
-        EntryExitUpdateLogic $updateLogic)
+        EntryExitUpdateLogic $updateLogic,
+        EntryExitDeleteLogic $deleteLogic,
+        EntryExitSlipRepository $entryExitSlipRepository
+        )
     {
         $this->createtionLogic = $logic;
         $this->numberRepository = $numberRepository;
         $this->stockService = $stockService;
         $this->initializeLogic = $initializeLogic;
         $this->updateLogic = $updateLogic;
+        $this->deleteLogic = $deleteLogic;
+        $this->entryExitSlipRepository = $entryExitSlipRepository;
     }
 
     public function create(Request $request)
@@ -134,5 +144,23 @@ class EntryExitServiceImpl implements EntryExitService
 
         $this->updateLogic->update($slip);
     }
+
+
+    public function delete(int $id)
+    {
+        //　伝票情報を取得する
+        $slip = $this->entryExitSlipRepository->findById($id);
+        
+        foreach($slip->getDetails() as $detail)
+        {
+            // dtoの作成
+            $stockDto = new StockDto($detail->getItemName(),$detail->getWarehouseName(), $detail->getCount());
+            $this->stockService->deleteUpdate($stockDto);
+        }
+        // 伝票と明細を削除する
+        $this->deleteLogic->delete($slip);
+
+    }
+
 
 }

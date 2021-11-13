@@ -115,24 +115,24 @@ class EntryExitServiceImpl implements EntryExitService
         $detail->setwarehouseName($request->warehousename);
         $slip->safeAddDetail($detail);
 
-
         $validationLogic = new EntryExitUpdateeValidation($slip,$oldSlip);
         $validationLogic->execute();
 
     
         // 在庫のロジックが少し複雑になる
+        foreach($oldSlip->getDetails() as $oldDetail)
+        {
 
-        // 個数
+            // 現状は明細は1個であるのでロジックを追加せず処理して動きを見ます
+            $oldStockDto = new StockDto($oldDetail->getItemName(),$oldDetail->getWarehouseName(), $oldDetail->getCount());
 
-        //　個数の計算
+            // 新しい明細情報
+            $newStockDto = new StockDto($detail->getItemName(), $detail->getWarehouseName(), $detail->getCount());
+            $this->stockService->changeUpdate($newStockDto,$oldStockDto);
+        }
 
-        // 基本的には品目と倉庫の変更はだめ→削除してください。
-
-        //　倉庫と品目を変更した場合、元の個数をマイナスかプラスか計算して在庫に反映する
 
         $this->updateLogic->update($slip);
-
-        
     }
 
 }

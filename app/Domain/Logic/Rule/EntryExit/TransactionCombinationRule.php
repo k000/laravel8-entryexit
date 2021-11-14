@@ -26,7 +26,6 @@ class TransactionCombinationRule implements Rule
             {
                 if($detail->getDetailDiv() === "出庫" || $detail->getDetailDiv() === "破棄"){
                     array_push($messages,["伝票と明細の取引区分が不正です。"]);
-                    array_push($messages,["試しに2つ目のエラーメッセージを投入"]);
                 }
             }
         }

@@ -19,16 +19,6 @@ class EntryExitInitializeLogicImpl implements EntryExitInitializeLogic
 
     public function getAll()
     {
-        // ドメインモデルを返却します。
-        // この記載だとEloquentモデルに依存しがち
         return $this->slipRepository->getAll();
-
     }
-
-    public function findById(int $id)
-    {
-        return $this->slipRepository->findById($id);
-    }
-
-
 }

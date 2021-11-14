@@ -98,7 +98,7 @@ class EntryExitServiceImpl implements EntryExitService
 
     public function getByEntryExitId(int $id)
     {
-        return $this->initializeLogic->findById($id);
+        return $this->entryExitSlipRepository->findById($id);
     }
 
     // クラス分割したい
@@ -106,7 +106,7 @@ class EntryExitServiceImpl implements EntryExitService
     {
    
         // 元の伝票を確保しておく
-        $oldSlip = $this->updateLogic->getOldSlip(intval($request->slipno));
+        $oldSlip = $this->entryExitSlipRepository->findById(intval($request->slipno));
 
         // 入力された情報で伝票情報を作成する
         $slip = new EntryExitSlip();

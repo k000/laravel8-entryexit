@@ -20,12 +20,6 @@ class EntryExitUpdateLogicImpl implements EntryExitUpdateLogic
         $this->detailRepository = $detailRepository;
     }
 
-
-    public function getOldSlip(int $entryexitId)
-    {
-        return $this->slipRepository->findById($entryexitId);
-    }
-
     public function update(EntryExitSlip $slip)
     {
         // 伝票の登録

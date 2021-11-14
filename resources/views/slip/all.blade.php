@@ -25,6 +25,8 @@
 
         <div>
 
+           
+
             @foreach($slips as $slip)
                 <hr />
                 <div class="mt-6 ml-6">
@@ -69,6 +71,8 @@
                     </table>
                 </div>
             @endforeach
+
+     
 
         </div>
 

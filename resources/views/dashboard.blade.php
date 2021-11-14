@@ -10,6 +10,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
+                    <div>
+                        <a href="{{ route('entryexitcreate') }}">入出庫伝票登録</a>
+                    </div>
+                    <div>
+                        <a href="{{ route('stocks') }}">在庫状況一覧</a>
+                    </div>
+
                 </div>
             </div>
         </div>

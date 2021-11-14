@@ -30,21 +30,21 @@ Route::post('/entryexit/update',[App\Http\Controllers\EntryExitController::class
 
 Route::post('/entryexit/delete/{id}', [App\Http\Controllers\EntryExitController::class, 'delete'])->middleware(['auth'])->name('entryexitdelete');
 
-Route::get('/stocks',[App\Http\Controllers\StockController::class, 'all'])->middleware(['auth']);
+Route::get('/stocks',[App\Http\Controllers\StockController::class, 'all'])->middleware(['auth'])->name('stocks');
 
 
 
 
 Route::get('/item/create',function(){
     return view('item.create');
-})->middleware(['auth:admin']);
+})->middleware(['auth:admin'])->name('itemcreate');
 
 Route::post('/item/store',[App\Http\Controllers\ItemController::class, 'store'])->middleware(['auth:admin']);
 
 
 Route::get('/warehouse/create',function(){
     return view('warehouse.create');
-})->middleware(['auth:admin']);
+})->middleware(['auth:admin'])->name('warehousecreate');
 
 Route::post('/warehouse/store',[App\Http\Controllers\WarehouseController::class, 'store'])->middleware(['auth:admin']);
 

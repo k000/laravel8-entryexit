@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Domain\Service\EntryExitComboboxService;
 use App\Domain\Service\EntryExitService;
+use App\Http\Mapper\EntryExitMapper;
 use Illuminate\Http\Request;
 
 class EntryExitController extends Controller
@@ -37,7 +38,11 @@ class EntryExitController extends Controller
     public function all()
     {
         // 伝票情報
-        $slips = $this->appService->getAll();
+        $entities = $this->appService->getAll();
+        
+        // ViewModelに変換する
+        $mapper = new EntryExitMapper();
+        $slips = $mapper->toViewModels($entities);
 
         return view('slip.all', compact('slips'));
     }
@@ -46,9 +51,13 @@ class EntryExitController extends Controller
     public function edit($id)
     {
         // 伝票情報を取得
-        $slip = $this->appService->getByEntryExitId($id);
+        $entity = $this->appService->getByEntryExitId($id);
         // コンボボックスの取得
         $comboboxs = $entryexitCombo = $this->comboboxService->getEntryExitCombobox();
+
+        // toViewModel
+        $mapper = new EntryExitMapper();
+        $slip = $mapper->toViewModel($entity);
     
         // Viewの反映
         return view('slip.edit', compact('slip','comboboxs'));

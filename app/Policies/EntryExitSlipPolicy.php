@@ -2,94 +2,29 @@
 
 namespace App\Policies;
 
-use App\Models\EntryExitSlip;
+use App\Domain\Model\Entity\EntryExitSlip;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class EntryExitSlipPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Create a new policy instance.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return void
      */
-    public function viewAny(User $user)
+    public function __construct()
     {
         //
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\EntryExitSlip  $entryExitSlip
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, EntryExitSlip $entryExitSlip)
+    // EntryExitSlipはModelsでなくてEntity
+    public function update(Authenticatable $authenticatable, EntryExitSlip $slip): bool
     {
-        //
+        return intval($authenticatable->getAuthIdentifier()) === intval($slip->getUpdateUser());
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\EntryExitSlip  $entryExitSlip
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, EntryExitSlip $entryExitSlip)
-    {
-        //
-        return $user->id == $entryExitSlip->update_user;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\EntryExitSlip  $entryExitSlip
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, EntryExitSlip $entryExitSlip)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\EntryExitSlip  $entryExitSlip
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, EntryExitSlip $entryExitSlip)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\EntryExitSlip  $entryExitSlip
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, EntryExitSlip $entryExitSlip)
-    {
-        //
-    }
 }

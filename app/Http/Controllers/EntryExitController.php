@@ -76,14 +76,4 @@ class EntryExitController extends Controller
        $this->appService->delete($id);
     }
 
-
-    public function updateSlip()
-    {
-        $model = new EntryExitSlip();
-        $user = auth()->user();
-        if($user->can('update',$model)){
-            // 処理
-        }
-    }
-
 }

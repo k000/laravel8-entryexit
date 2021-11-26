@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Domain\Service\EntryExitComboboxService;
 use App\Domain\Service\EntryExitService;
 use App\Http\Mapper\EntryExitMapper;
+use App\Models\EntryExitSlip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntryExitController extends Controller
 {
@@ -72,6 +74,16 @@ class EntryExitController extends Controller
     public function delete($id)
     {
        $this->appService->delete($id);
+    }
+
+
+    public function updateSlip()
+    {
+        $model = new EntryExitSlip();
+        $user = auth()->user();
+        if($user->can('update',$model)){
+            // 処理
+        }
     }
 
 }

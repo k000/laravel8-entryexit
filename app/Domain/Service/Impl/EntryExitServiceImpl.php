@@ -17,6 +17,7 @@ use App\Domain\Service\EntryExitService;
 use App\Domain\Service\StockService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntryExitServiceImpl implements EntryExitService
 {
@@ -66,7 +67,7 @@ class EntryExitServiceImpl implements EntryExitService
         $slip->setEntryExitId($newNo);        
         $slip->setSlipDiv($request->slipdiv);
         $slip->setSlipDate(new Carbon($request->slipdate));
-        $slip->setUpdateUser("testuser");
+        $slip->setUpdateUser(Auth::id());
 
         $detail = new EntryExitDetail();
         $detail->setEntryExitNo($newNo);

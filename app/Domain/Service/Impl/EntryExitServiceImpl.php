@@ -17,6 +17,8 @@ use App\Domain\Service\EntryExitService;
 use App\Domain\Service\StockService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class EntryExitServiceImpl implements EntryExitService
 {
@@ -66,7 +68,7 @@ class EntryExitServiceImpl implements EntryExitService
         $slip->setEntryExitId($newNo);        
         $slip->setSlipDiv($request->slipdiv);
         $slip->setSlipDate(new Carbon($request->slipdate));
-        $slip->setUpdateUser("testuser");
+        $slip->setUpdateUser(Auth::id());
 
         $detail = new EntryExitDetail();
         $detail->setEntryExitNo($newNo);
@@ -113,7 +115,7 @@ class EntryExitServiceImpl implements EntryExitService
         $slip->setEntryExitId($request->slipno);        
         $slip->setSlipDiv($request->slipdiv);
         $slip->setSlipDate(new Carbon($request->slipdate));
-        $slip->setUpdateUser("testuser");
+        $slip->setUpdateUser($request->user()->id); // TODO 画面側にユーザーIDを保持
 
         $detail = new EntryExitDetail();
         $detail->setEntryExitNo($request->slipno);
@@ -124,6 +126,17 @@ class EntryExitServiceImpl implements EntryExitService
         $detail->setItemName($request->itemname);
         $detail->setwarehouseName($request->warehousename);
         $slip->safeAddDetail($detail);
+
+        // TODO なんかクラス分割か何か
+        if($request->user()->cannot('update',$slip))
+        {
+            dd("更新できませんでした");
+        }
+        /**ゲートの場合
+        if(!Gate::allows("update-slip",$slip)){
+            dd("更新できませんでした");
+        }
+        */
 
         $validationLogic = new EntryExitUpdateeValidation($slip,$oldSlip);
         $validationLogic->execute();

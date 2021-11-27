@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Domain\Service\EntryExitComboboxService;
 use App\Domain\Service\EntryExitService;
 use App\Http\Mapper\EntryExitMapper;
+use App\Models\EntryExitSlip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntryExitController extends Controller
 {

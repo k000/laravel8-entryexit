@@ -128,15 +128,15 @@ class EntryExitServiceImpl implements EntryExitService
         $slip->safeAddDetail($detail);
 
         // TODO なんかクラス分割か何か
-        /*
         if($request->user()->cannot('update',$slip))
         {
             dd("更新できませんでした");
         }
-        */
+        /**ゲートの場合
         if(!Gate::allows("update-slip",$slip)){
             dd("更新できませんでした");
         }
+        */
 
         $validationLogic = new EntryExitUpdateeValidation($slip,$oldSlip);
         $validationLogic->execute();

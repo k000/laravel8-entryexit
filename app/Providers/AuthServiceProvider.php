@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+// 残してます
 use App\Domain\Model\Entity\EntryExitSlip;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -28,10 +29,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // 追加
+        // ゲートを使う場合
+        /*
         Gate::define('update-slip', function (User $user, EntryExitSlip $slip) {
             return $user->id == $slip->getUpdateUser();
         });
-        
+        */
     }
 }

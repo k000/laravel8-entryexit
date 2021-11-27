@@ -35,5 +35,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id == $slip->getUpdateUser();
         });
         */
+        
     }
 }

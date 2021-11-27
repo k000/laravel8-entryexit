@@ -18,6 +18,7 @@ use App\Domain\Service\StockService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class EntryExitServiceImpl implements EntryExitService
 {
@@ -127,8 +128,13 @@ class EntryExitServiceImpl implements EntryExitService
         $slip->safeAddDetail($detail);
 
         // TODO なんかクラス分割か何か
+        /*
         if($request->user()->cannot('update',$slip))
         {
+            dd("更新できませんでした");
+        }
+        */
+        if(!Gate::allows("update-slip",$slip)){
             dd("更新できませんでした");
         }
 
